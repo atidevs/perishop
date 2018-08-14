@@ -1,0 +1,23 @@
+#navbar {
+  box-shadow: 0 4px gray;
+  height: 80px;
+}
+
+a {
+  color: white;
+  text-align: center;
+}
+
+.btn:hover {
+  background-color: black;
+  border-radius: 8px;
+}
+
+.divider {
+  height: 80px;
+  border-right: 1px solid rgb(255, 255, 255);
+}
+
+@media (max-width: 800px) {
+  
+}
