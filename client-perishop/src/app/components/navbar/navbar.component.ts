@@ -9,7 +9,7 @@ export class NavbarComponent implements OnInit {
 
   user = {
     name: 'Atmane', // user name
-    isAuth: false // is the user authenticated
+    isAuth: true // is the user authenticated
   };
 
   constructor() { }

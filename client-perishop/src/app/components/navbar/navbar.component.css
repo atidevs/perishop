@@ -18,6 +18,29 @@ a {
   border-right: 1px solid rgb(255, 255, 255);
 }
 
-@media (max-width: 800px) {
+@media (max-width: 850px) {
+  #navbar {
+    display: flex;
+    flex-direction: column;
+    height: 170px;
+  }
+
+  #auth-links {
+    margin: 5px auto 0 auto !important; 
+  }
+
+  #nav-links {
+    margin: 5px auto 0 auto !important;
+  }
   
+  #brand {
+    margin: 10px auto 0px auto !important; 
+  }
+}
+
+@media (min-width: 850px) {
+  #navbar {
+    display: flex;
+    flex-direction: row;
+  }
 }

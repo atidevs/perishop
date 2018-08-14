@@ -1,6 +1,6 @@
-<nav class="d-flex flex-row align-items-center navbar-dark bg-dark" id="navbar">
+<nav class="d-flex align-items-center navbar-dark bg-dark" id="navbar">
 
-  <div class="mr-4 ml-4">
+  <div class="mr-4 ml-4" id="brand">
     <a class="navbar-brand" href="#">
       <img src="../../../assets/logo.png" style="width: 48px; height: 48px;" alt="Perishop logo">
     </a>
@@ -8,16 +8,25 @@
     <span class="ml-3 divider"></span>
   </div>
 
-  <div class="">
-    <a class="btn" href="#"><i class="fas fa-map-marker-alt mr-2"></i>Nearby Shops</a>
-    <a class="btn" href="#"><i class="fas fa-heart mr-2"></i>Preferred Shops</a>
+  <div id="nav-links">
+    <a class="btn" href="#">
+      <i class="fas fa-map-marker-alt mr-2"></i>Nearby Shops</a>
+    <a class="btn" href="#">
+      <i class="fas fa-heart mr-2"></i>Preferred Shops</a>
   </div>
 
-  <div class="ml-auto mr-4">
-    <a *ngIf="!user.isAuth" class="btn" href="#">Log In<i class="fas fa-sign-in-alt ml-2"></i></a>
-    <a *ngIf="!user.isAuth" class="btn" href="#">Sign Up<i class="fas fa-user-plus ml-2"></i></a>
-    <a *ngIf="user.isAuth" class="btn" href="#">Welcome {{ user.name }}</a>
-    <a *ngIf="user.isAuth" class="btn" href="#">Log Out<i class="fas fa-sign-out-alt ml-2"></i> </a>
+  <div class="ml-auto mr-4" id="auth-links">
+    <a *ngIf="!user.isAuth" class="btn" href="#">Log In
+      <i class="fas fa-sign-in-alt ml-2"></i>
+    </a>
+    <a *ngIf="!user.isAuth" class="btn" href="#">Sign Up
+      <i class="fas fa-user-plus ml-2"></i>
+    </a>
+    <a *ngIf="user.isAuth" class="btn" href="#">
+      <i class="fas fa-user mr-2"></i>Welcome {{ user.name }}</a>
+    <a *ngIf="user.isAuth" class="btn" href="#">Log Out
+      <i class="fas fa-sign-out-alt ml-2"></i>
+    </a>
   </div>
 
 </nav>
