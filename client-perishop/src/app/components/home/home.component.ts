@@ -7,6 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
+  shopsImages = [
+    "../../../assets/shop_images/shop1.jpg",
+    "../../../assets/shop_images/shop2.jpg",
+    "../../../assets/shop_images/shop3.jpg",
+    "../../../assets/shop_images/shop4.jpg"
+  ];
+
   constructor() { }
 
   ngOnInit() {

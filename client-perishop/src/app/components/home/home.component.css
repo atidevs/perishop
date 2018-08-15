@@ -1,0 +1,14 @@
+img {
+  width: auto;
+  height: 200px;
+}
+
+.img-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    flex-direction: row;
+}
+
+
+
