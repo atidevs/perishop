@@ -2,29 +2,29 @@
 
   <div class="mr-4 ml-4" id="brand">
     <a class="navbar-brand" href="#">
-      <img src="../../../assets/logo.png" style="width: 48px; height: 48px;" alt="Perishop logo">
+      <img [routerLink]="['']" src="../../../assets/logo.png" style="width: 48px; height: 48px;" alt="Perishop logo">
     </a>
     <h4 class="text-white lead d-inline">Shoppy</h4>
     <span class="ml-3 divider"></span>
   </div>
 
   <div id="nav-links">
-    <a class="btn" href="#">
+    <a [routerLink]="['nearby']" class="btn" href="#">
       <i class="fas fa-map-marker-alt mr-2"></i>Nearby Shops</a>
-    <a class="btn" href="#">
+    <a [routerLink]="['myshops']" class="btn" href="#">
       <i class="fas fa-shopping-bag mr-2"></i>My Shops</a>
   </div>
 
   <div class="ml-auto mr-4" id="auth-links">
-    <a *ngIf="!user.isAuth" class="btn" href="#">Log In
+    <a [routerLink]="['login']" *ngIf="!user.isAuth" class="btn" href="#">Log In
       <i class="fas fa-sign-in-alt ml-2"></i>
     </a>
-    <a *ngIf="!user.isAuth" class="btn" href="#">Sign Up
+    <a [routerLink]="['signup']" *ngIf="!user.isAuth" class="btn" href="#">Sign Up
       <i class="fas fa-user-plus ml-2"></i>
     </a>
     <a *ngIf="user.isAuth" class="btn" href="#">
       <i class="fas fa-user mr-2"></i>Welcome {{ user.name }}</a>
-    <a *ngIf="user.isAuth" class="btn" href="#">Log Out
+    <a [routerLink]="['']" *ngIf="user.isAuth" class="btn" href="#">Log Out
       <i class="fas fa-sign-out-alt ml-2"></i>
     </a>
   </div>

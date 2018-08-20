@@ -10,6 +10,7 @@ import { SignupComponent } from './components/signup/signup.component';
 import { NearbyshopsComponent } from './components/nearbyshops/nearbyshops.component';
 import { MyshopsComponent } from './components/myshops/myshops.component';
 import { HomeComponent } from './components/home/home.component';
+import { AppRoutingModule } from './/app-routing.module';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { HomeComponent } from './components/home/home.component';
     HomeComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
