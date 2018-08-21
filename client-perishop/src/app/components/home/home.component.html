@@ -1,4 +1,4 @@
-<div class="container-fluid mt-5 rounded shadow-sm" style="background-color: rgb(238, 238, 238);">
+<div class="container-fluid mt-5 mb-3 rounded shadow-sm" style="background-color: rgb(238, 238, 238);">
   <div class="img-container pt-3">
     <img class="m-1 shadow-sm" *ngFor="let img of shopsImages" [src]='img' alt="Random Shops Images" />
   </div>
@@ -16,8 +16,7 @@
       Find out nearby ones to visit, like or dislike !
     </h4>
   </div>
-
-
+  
   <div class="text-center pb-3">
     <button [routerLink]="['login']" class="btn-lg btn-primary m-2 pl-4 pr-4">Log In</button>
     <span class="h3 font-weight-light m-2">/</span>
