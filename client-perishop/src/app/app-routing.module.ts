@@ -20,7 +20,8 @@ const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'user', component: UserComponent },
   { path: 'nearby', component: NearbyshopsComponent },
-  { path: 'myshops', component: MyshopsComponent }
+  { path: 'myshops', component: MyshopsComponent },
+  { path: 'user', component: UserComponent}
 ];
 
 @NgModule({

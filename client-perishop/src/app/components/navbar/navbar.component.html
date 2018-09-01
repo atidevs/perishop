@@ -8,7 +8,7 @@
     <span class="ml-3 divider"></span>
   </div>
 
-  <div id="nav-links">
+  <div *ngIf="authService.loggedIn()" id="nav-links">
     <a [routerLink]="['nearby']" class="btn" href="#">
       <i class="fas fa-map-marker-alt mr-2"></i>Nearby Shops</a>
     <a [routerLink]="['myshops']" class="btn" href="#">
@@ -16,15 +16,15 @@
   </div>
 
   <div class="ml-auto mr-4" id="auth-links">
-    <a [routerLink]="['login']" *ngIf="!user.isAuth" class="btn" href="#">Log In
+    <a *ngIf="!authService.loggedIn()" [routerLink]="['login']" class="btn" href="#">Log In
       <i class="fas fa-sign-in-alt ml-2"></i>
     </a>
-    <a [routerLink]="['signup']" *ngIf="!user.isAuth" class="btn" href="#">Sign Up
+    <a *ngIf="!authService.loggedIn()" [routerLink]="['signup']" class="btn" href="#">Sign Up
       <i class="fas fa-user-plus ml-2"></i>
     </a>
-    <a *ngIf="user.isAuth" class="btn" href="#">
-      <i class="fas fa-user mr-2"></i>Welcome {{ user.name }}</a>
-    <a [routerLink]="['']" *ngIf="user.isAuth" class="btn" href="#">Log Out
+    <a *ngIf="authService.loggedIn()" [routerLink]="['user']" class="btn">
+      <i class="fas fa-user mr-2"></i>Profile</a>
+    <a *ngIf="authService.loggedIn()" (click) = "onLogOut()" [routerLink]="['']" class="btn" href="#">Log Out
       <i class="fas fa-sign-out-alt ml-2"></i>
     </a>
   </div>
