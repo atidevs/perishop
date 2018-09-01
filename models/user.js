@@ -85,26 +85,20 @@ module.exports.likeShop = function (username, shopName, callback) {
    * Checking if the parameter shopName already exists
    * in the dislikedShops array.
    */
-  User.findOne({ dislikedShops: { $in: [shopName] } }, (err, res) => {
+  User.updateOne({ username: username },
+    { $addToSet: { likedShops: shopName } }, (err, raw) => {
+      if (err) throw err;
+    });
+
+  User.findOne({ username: username, dislikedShops: { $in: [shopName] } }, (err, res) => {
     if (err) throw err;
-    if (!res) {
-      /**
-       * In case no shop matching shopName is liked :
-       * push shopName to likedShops array.
-       */
-      User.updateOne({ username: username }, {
-        $addToSet: { likedShops: shopName }
-      }, callback);
-    } else {
-      /**
-       * Else if shopName is found to be already
-       * disliked : it cannot be liked !
-       * Send out a message letting the user know
-       * it is disliked
-       */
-      callback(err,
-        { ok: 1, msg: `${shopName} is disliked!` });
+    if (res) {
+      User.updateOne({ username: username },
+        { $pull: { dislikedShops: { $in: [shopName] } } }, (err, raw) => {
+          if (err) throw err;
+        });
     }
+    callback(null, { success: true, msg: 'Shop liked!' });
   });
 }
 
@@ -118,35 +112,32 @@ module.exports.likeShop = function (username, shopName, callback) {
  */
 module.exports.dislikeShop = function (username, shopName, callback) {
   /**
-   * Checking if the parameter shopName already exists
-   * in the likedShops array.
-   */
-  User.findOne({ likedShops: { $in: [shopName] } }, (err, res) => {
+ * push shopName to dislikedShops array.
+ */
+  User.updateOne({ username: username },
+    { $addToSet: { dislikedShops: shopName } }, (err, raw) => {
+      if (err) throw err;
+      /**
+       * Checking if the parameter shopName already exists
+       * in the likedShops array.
+       */
+    });
+
+  User.findOne({ username: username, likedShops: { $in: [shopName] } }, (err, res) => {
     if (err) throw err;
-    if (!res) {
-      /**
-       * In case no shop matching shopName is disliked :
-       * push shopName to dislikedShops array.
-       */
-      User.updateOne({ username: username }, {
-        $addToSet: { 'dislikedShops': shopName }
-      }, callback);
-    } else {
-      /**
-       * Else if shopName is found to be already
-       * liked : it cannot be disliked !
-       * Send out a message letting the user know
-       * it is liked
-       */
-      callback(null,
-        { success: false, msg: `${shopName} is liked!` });
+    if (res) {
+      User.updateOne({ username: username },
+        { $pull: { likedShops: { $in: [shopName] } } }, (err, raw) => {
+          if (err) throw err;
+        });
     }
+    callback(null, { success: true, msg: 'Shop disliked!' });
   });
 }
 
-module.exports.comparePassword = function(candidatePassword, hash, callback) {
+module.exports.comparePassword = function (candidatePassword, hash, callback) {
   bcrypt.compare(candidatePassword, hash, (err, isMatch) => {
-    if(err) throw err;
+    if (err) throw err;
     callback(null, isMatch);
   });
 }

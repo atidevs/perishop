@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
-const config = require('../config/database');
+const User = require('../models/user');
 
 /**
  * Constant values for distance calculation
@@ -103,4 +102,16 @@ module.exports.getNearbyShops = function (userLocation, shops, radius) {
 
   // Return nearbyShops array.
   return nearbyShops;
+}
+
+module.exports.isLiked = function (username, shopName, callback) {
+  User.findOne({ username: username, likedShops: { $in: [shopName] } }, (err, isFound) => {
+    callback(err, isFound);
+  });
+}
+
+module.exports.isDisliked = function (username, shopName, callback) {
+  User.findOne({ username: username, dislikedShops: { $in: [shopName] } }, (err, isFound) => {
+    callback(err, isFound);
+  });
 }

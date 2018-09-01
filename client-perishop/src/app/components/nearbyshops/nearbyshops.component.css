@@ -1,7 +1,6 @@
 .icon {
+  width: 24px;
   height: 24px;
-  width: auto;
-  margin: 0px 5px;
 }
 
 @media(max-width: 50rem){

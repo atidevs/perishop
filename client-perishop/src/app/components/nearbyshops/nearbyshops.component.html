@@ -1,15 +1,17 @@
 <div class="container">
-  <label class="mr-2" for="radius"><i class="fas fa-search mr-2"></i>Search by radius:</label>
-  <select [(ngModel)]="radius" name="radius" id="radius">
+  <label class="m-2 h5" for="radius"><i class="fas fa-search mr-2"></i>Search by radius :</label>
+  <select class="m-2" [(ngModel)]="radius" name="radius" id="radius">
     <option value="1">1 Km</option>
     <option value="2">2 Km</option>
     <option value="5">5 Km (default)</option>
     <option value="10">10 Km</option>
     <option value="20">20 Km</option>
   </select>
+  <button (click)="getShops()" class="btn btn-info m-2">Search</button>
+  <button (click)="loadShops()" class="btn btn-success m-2">Load Shops</button>
 </div>
 
-<div *ngIf = "nearbyShops" class="container card-container d-flex flex-row flex-wrap">
+<div *ngIf="numberOfShops != 0" class="container card-container d-flex flex-row flex-wrap">
   <div *ngFor="let shop of nearbyShops" class="card shadow m-4" style="width: 18rem;">
     <img class="card-img-top" src="{{ shop.picture }}" alt="Card image cap">
     <div class="card-body">
@@ -19,19 +21,23 @@
     <ul class="list-group list-group-flush">
       <li class="list-group-item">{{ shop.email }}</li>
     </ul>
-    <div class="card-body d-flex flex-row justify-content-end">
-      <div>
-        <img (click)="unDislikeShop(shop)" class="icon" src="../../../assets/thumbs-down-dark.svg" alt="thumbs down" />
+    <div class="card-body d-flex flex-row justify-content-center">
 
-        <img (click)="dislikeShop(shop)" class="icon" src="../../../assets/thumbs-down-regular.svg" alt="thumbs down" />
+      <div class="d-flex flex-row align-items-center mr-2">
+        <i class="far fa-heart m-2 icon"></i>
+        <button (click)="onLikeShop(shop.name)" class="btn btn-primary m-2">Like</button>
       </div>
 
-      <div>
-        <img (click)="likeShop(shop)" class="icon" src="../../../assets/heart-regular.svg" alt="heart-shaped like" />
-
-        <img (click)="unlikeShop(shop)" class="icon" src="../../../assets/heart-liked.svg" alt="heart-shaped like" />
+      <div class="d-flex flex-row align-items-center ml-2">
+      <i class="far fa-thumbs-down m-2 icon"></i><button (click)="onDislikeShop(shop.name)" class="btn btn-danger m-2">Dislike</button>
       </div>
+
     </div>
   </div>
 
 </div>
+
+<!-- <i *ngIf="!this.shopService.isLiked(shop.name)" class="far fa-thumbs-down m-2 icon"></i>
+<i *ngIf="this.shopService.isLiked(shop.name)" class="fas fa-thumbs-down m-2 icon" style="color: black"></i>
+<i *ngIf="this.shopService.isDisliked(shop.name)" class="fas fa-heart m-2 icon" style="color: red"></i>
+<i *ngIf="!this.shopService.isDisliked(shop.name)" class="far fa-heart m-2 icon"></i> -->

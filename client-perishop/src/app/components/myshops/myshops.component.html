@@ -1,3 +1,22 @@
-<p>
-  myshops works!
-</p>
+<!-- <button (click)="loadMyShops()" class="btn btn-primary m-2">Load My Shops</button> -->
+
+<div *ngIf="numberOfShops != 0" class="container card-container d-flex flex-row flex-wrap">
+  <div *ngFor="let shop of myShops" class="card shadow m-4" style="width: 18rem;">
+    <img class="card-img-top" src="{{ shop.picture }}" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">{{ shop.name }}</h5>
+      <p class="card-text">{{ shop.city }}</p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">{{ shop.email }}</li>
+    </ul>
+    <div class="card-body d-flex flex-row justify-content-center">
+
+      <div class="d-flex flex-row align-items-center mr-2">
+        <i class="far fa-heart m-2 icon"></i>
+        <button (click)="unLike(shop.name)" class="btn btn-danger m-2">unLike</button>
+      </div>
+    </div>
+  </div>
+
+</div>
