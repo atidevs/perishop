@@ -14,16 +14,16 @@
     8. As an unregistered user you cannot access any of the functionalities, but the home page.
 ---   
 ### Screenshots :
-![alt text][img1] ![alt text][App image #1]
-![alt text][img2] ![alt text][App image #2]
-![alt text][img3] ![alt text][App image #3]
-![alt text][img4] ![alt text][App image #4]
-![alt text][img5] ![alt text][App image #5]
-![alt text][img6] ![alt text][App image #6]
-![alt text][img7] ![alt text][App image #7]
-![alt text][img8] ![alt text][App image #8]
-![alt text][img9] ![alt text][App image #9]
-![alt text][img10] ![alt text][App image #10]
+![alt text][img1]
+![alt text][img2]
+![alt text][img3]
+![alt text][img4]
+![alt text][img5]
+![alt text][img6]
+![alt text][img7]
+![alt text][img8]
+![alt text][img9]
+![alt text][img10]
 
 [img1]: ./app-img/home.png "Perishop Home page image"
 [img2]: ./app-img/login.png "Perishop login page image"
