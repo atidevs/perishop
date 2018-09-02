@@ -10,8 +10,12 @@ import { AuthService } from '../../services/auth.service';
 })
 export class NearbyshopsComponent implements OnInit {
 
-  nearbyShops: Array<{}>;
-  numberOfShops: number;
+  nearbyShops = {
+    success: false,
+    numberOfShops: 0,
+    nearbyShops: [],
+  };
+
   radius = 5;
 
   constructor(
@@ -33,32 +37,32 @@ export class NearbyshopsComponent implements OnInit {
   }
 
   getShops() {
-    this.shopService.getNearbyShops(this.radius);
-    this.flashMessage.show('Searching... Please wait!', { cssClass: 'alert-info', timeout: 3000 });
-    setTimeout(() => {
-      this.flashMessage.show('Please, try loading shops...', { cssClass: 'alert-success', timeout: 2000 });
-    },
-      3000);
+    this.shopService.getNearbyShops(this.radius).subscribe((data: any) => {
+      if (data.success) {
+        this.flashMessage.show(`${data.numberOfShops} Shops found! Loading...`, { cssClass: 'alert-success', timeout: 3000 });
+        this.nearbyShops.success = data.success;
+        this.nearbyShops.numberOfShops = data.numberOfShops;
+        this.nearbyShops.nearbyShops = data.nearbyShops;
+      } else {
+        this.flashMessage.show('No shops found, please increase radius!', { cssClass: 'alert-danger', timeout: 3000 });
+      }
+    }, err => { console.log(err) });
   }
 
-  loadShops() {
-    if (!this.shopService.nearbyShops.success) {
-      this.flashMessage.show('No shops found, please increase radius!', { cssClass: 'alert-danger', timeout: 3000 });
-    } else {
-      this.numberOfShops = this.shopService.nearbyShops.numberOfShops;
-      this.nearbyShops = this.shopService.nearbyShops.nearbyShops;
-      this.flashMessage.show(`${this.numberOfShops} Shops found! Loading...`, { cssClass: 'alert-success', timeout: 4000 });
-    }
+  onDislikeShop(shop) {
+    let date = new Date().getHours();
+    console.log(date);
+    this.shopService.onDislikeShop(shop._id, date).subscribe((data: any) => {
+      console.log(data);
+      alert(`${shop.name} ${data.msg}`);
+    }, err => { console.log(err) });
   }
 
-  onDislikeShop(shopName) {
-    alert(`${shopName} is disliked!`);
-    this.shopService.onDislikeShop(shopName);
-  }
-
-  onLikeShop(shopName) {
-    alert(`${shopName} is liked!`);
-    this.shopService.onLikeShop(shopName);
+  onLikeShop(shop) {
+    this.shopService.onLikeShop(shop._id).subscribe((data: any) => {
+      console.log(data);
+      alert(`${shop.name} ${data.msg}`);
+    }, err => { console.log(err) });
   }
 
 }

@@ -1,0 +1,10 @@
+.icon {
+  width: 24px;
+  height: 24px;
+}
+
+@media(max-width: 50rem){
+  .card-container{
+    justify-content: center;
+  }
+}

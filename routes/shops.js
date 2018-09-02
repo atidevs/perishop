@@ -30,46 +30,46 @@ var radius = 5;
  */
 
 // like route
-router.get('/nearby/l/:username-:shopName', (req, res) => {
+router.get('/nearby/l/:username-:shopId', (req, res) => {
   /**
    * When a user likes a shop
    */
-  User.likeShop(req.params.username, req.params.shopName, (err, raw) => {
+  User.likeShop(req.params.username, req.params.shopId, (err, raw) => {
     if (err) throw err;
     res.json(raw);
   });
 });
 
 // dislike route
-router.get('/nearby/d/:username-:shopName', (req, res) => {
+router.get('/nearby/d/:username-:shopId-:date', (req, res) => {
   /**
    * When a user dislikes a shop
    */
-  User.dislikeShop(req.params.username, req.params.shopName, (err, data) => {
+  User.dislikeShop(req.params.username, req.params.shopId, req.params.date, (err, data) => {
     if (err) throw err;
     res.json(data);
   });
 });
 
 // unlike route
-router.get('/myshops/ul/:username-:shopName', (req, res) => {
+router.get('/myshops/ul/:username-:shopId', (req, res) => {
   /**
    * When a user unlikes a shop
    */
   User.updateOne({ username: req.params.username },
-    { $pull: { likedShops: { $in: [req.params.shopName] } } }, (err, raw) => {
+    { $pull: { likedShops: { $in: [req.params.shopId] } } }, (err, raw) => {
       if (err) throw err;
-      res.json({success: true, msg: `${req.params.shopName} is unLiked!`, raw: raw});
+      res.json({ success: true, msg: `${req.params.shopId} is unLiked!`, raw: raw });
     });
 });
 
 // undislike route
-router.get('/nearby/ud/:username-:shopName', (req, res) => {
+router.get('/nearby/ud/:username-:shopId', (req, res) => {
   /**
    * When a user undislikes a shop
    */
   User.updateOne({ username: req.params.username },
-    { $pull: { dislikedShops: { $in: [req.params.shopName] } } }, (err, raw) => {
+    { $pull: { dislikedShops: { shopId: req.params.shopId } } }, (err, raw) => {
       if (err) throw err;
       res.json(raw);
     });
@@ -127,39 +127,39 @@ router.get('/nearby/:lat-:long-:radius', (req, res) => {
   });
 });
 
-router.get('/nearby/isl/:username-:shopName', (req, res) => {
-  Shop.isLiked(req.params.username, req.params.shopName, (err, isFound) => {
-    if (err) throw err;
-    if (isFound) {
-      res.json({ success: true, msg: `${req.params.shopName} is liked by ${req.params.username}` });
-    } else {
-      res.json({ success: false });
-    }
-  });
-});
+// router.get('/nearby/isl/:username-:shopName', (req, res) => {
+//   Shop.isLiked(req.params.username, req.params.shopName, (err, isFound) => {
+//     if (err) throw err;
+//     if (isFound) {
+//       res.json({ success: true, msg: `${req.params.shopName} is liked by ${req.params.username}` });
+//     } else {
+//       res.json({ success: false });
+//     }
+//   });
+// });
 
-router.get('/nearby/isd/:username-:shopName', (req, res) => {
-  Shop.isDisliked(req.params.username, req.params.shopName, (err, isFound) => {
-    if (err) throw err;
-    if (isFound) {
-      res.json({ success: true, msg: `${req.params.shopName} is disliked by ${req.params.username}` });
-    } else {
-      res.json({ success: false });
-    }
-  });
-});
+// router.get('/nearby/isd/:username-:shopName', (req, res) => {
+//   Shop.isDisliked(req.params.username, req.params.shopName, (err, isFound) => {
+//     if (err) throw err;
+//     if (isFound) {
+//       res.json({ success: true, msg: `${req.params.shopName} is disliked by ${req.params.username}` });
+//     } else {
+//       res.json({ success: false });
+//     }
+//   });
+// });
 
 router.get('/myshops/:username', (req, res) => {
   User.findOne({ username: req.params.username }, (err, user) => {
-    if(err) throw err;
-    if(user) {
+    if (err) throw err;
+    if (user) {
       let myShops = user.likedShops;
-      Shop.find({ name: { $in: myShops }}, (err, shops) => {
-        if(err) throw err;
-        if(shops) {
-          res.json({success: true, numberOfShops: shops.length, myShops: shops});
+      Shop.find({ _id: { $in: myShops } }, (err, shops) => {
+        if (err) throw err;
+        if (shops) {
+          res.json({ success: true, numberOfShops: shops.length, myShops: shops });
         } else {
-          res.json({success: false, msg: 'No shops were liked!'});
+          res.json({ success: false, msg: 'No shops were liked!' });
         }
       });
     }

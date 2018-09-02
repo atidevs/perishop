@@ -80,21 +80,21 @@ module.exports.addUser = function (newUser, callback) {
  * @param {String} shopName 
  * @param {Function} callback 
  */
-module.exports.likeShop = function (username, shopName, callback) {
+module.exports.likeShop = function (username, shopId, callback) {
   /**
    * Checking if the parameter shopName already exists
    * in the dislikedShops array.
    */
   User.updateOne({ username: username },
-    { $addToSet: { likedShops: shopName } }, (err, raw) => {
+    { $addToSet: { likedShops: shopId } }, (err, raw) => {
       if (err) throw err;
     });
 
-  User.findOne({ username: username, dislikedShops: { $in: [shopName] } }, (err, res) => {
+  User.findOne({ username: username, dislikedShops: { $in: [shopId] } }, (err, res) => {
     if (err) throw err;
     if (res) {
       User.updateOne({ username: username },
-        { $pull: { dislikedShops: { $in: [shopName] } } }, (err, raw) => {
+        { $pull: { dislikedShops: { $in: [shopId] } } }, (err, raw) => {
           if (err) throw err;
         });
     }
@@ -110,12 +110,12 @@ module.exports.likeShop = function (username, shopName, callback) {
  * @param {String} shopName 
  * @param {Function} callback 
  */
-module.exports.dislikeShop = function (username, shopName, callback) {
+module.exports.dislikeShop = function (username, shopId, date, callback) {
   /**
  * push shopName to dislikedShops array.
  */
   User.updateOne({ username: username },
-    { $addToSet: { dislikedShops: shopName } }, (err, raw) => {
+    { $addToSet: { dislikedShops: {shopId, date} } }, (err, raw) => {
       if (err) throw err;
       /**
        * Checking if the parameter shopName already exists
@@ -123,11 +123,11 @@ module.exports.dislikeShop = function (username, shopName, callback) {
        */
     });
 
-  User.findOne({ username: username, likedShops: { $in: [shopName] } }, (err, res) => {
+  User.findOne({ username: username, likedShops: { $in: [shopId] } }, (err, res) => {
     if (err) throw err;
     if (res) {
       User.updateOne({ username: username },
-        { $pull: { likedShops: { $in: [shopName] } } }, (err, raw) => {
+        { $pull: { likedShops: { $in: [shopId] } } }, (err, raw) => {
           if (err) throw err;
         });
     }
