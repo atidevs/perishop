@@ -34,6 +34,9 @@ export class MyshopsComponent implements OnInit {
         this.myShops.success = data.success;
         this.myShops.numberOfShops = data.numberOfShops;
         this.myShops.myShops = data.myShops;
+        for (let i = 0; i < this.myShops.myShops.length; i++) {
+          this.myShops.myShops[i]["distanceAway"] = data.distances[i];
+        }
       }, err => { console.log(err) });
     }
   }

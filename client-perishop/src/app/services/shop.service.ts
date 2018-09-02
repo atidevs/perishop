@@ -63,5 +63,12 @@ export class ShopService {
 
     return this.http.get(`http://localhost:3000/shops/myshops/ul/${this.authService.user.username}-${shop._id}`, { headers: headers });
   }
+
+  isDisliked(shopId) {
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+
+    return this.http.get(`http://localhost:3000/shops/nearby/isd/${this.authService.user.username}-${shopId}`, { headers: headers });
+  }
 }
 

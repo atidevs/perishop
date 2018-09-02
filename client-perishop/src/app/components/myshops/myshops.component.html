@@ -2,11 +2,12 @@
   <div *ngFor="let shop of myShops.myShops" class="card shadow m-4" style="width: 18rem;">
     <img class="card-img-top" src="{{ shop.picture }}" alt="Card image cap">
     <div class="card-body">
-      <h5 class="card-title">{{ shop.name }}</h5>
-      <p class="card-text">{{ shop.city }}</p>
+      <h5 class="card-title"><i class="fab fa-shopware mr-3"></i>{{ shop.name }}</h5>
+      <p class="card-text ml-3"><i class="fas fa-building mr-3 mt-3"></i>{{ shop.city }}</p>
+      <p class="card-text ml-3"><i class="fas fa-road mr-3"></i>Distance Away: {{ shop.distanceAway }}</p>
     </div>
     <ul class="list-group list-group-flush">
-      <li class="list-group-item">{{ shop.email }}</li>
+      <li class="list-group-item ml-3"><i class="fas fa-at mr-3"></i>{{ shop.email }}</li>
     </ul>
     <div class="card-body d-flex flex-row justify-content-end align-items-center">
       <i class="far fa-heart mr-3 icon text-danger"></i>

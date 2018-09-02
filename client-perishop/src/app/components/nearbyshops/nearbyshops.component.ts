@@ -13,7 +13,7 @@ export class NearbyshopsComponent implements OnInit {
   nearbyShops = {
     success: false,
     numberOfShops: 0,
-    nearbyShops: [],
+    nearbyShops: []
   };
 
   radius = 5;
@@ -40,9 +40,15 @@ export class NearbyshopsComponent implements OnInit {
     this.shopService.getNearbyShops(this.radius).subscribe((data: any) => {
       if (data.success) {
         this.flashMessage.show(`${data.numberOfShops} Shops found! Loading...`, { cssClass: 'alert-success', timeout: 3000 });
+        console.log(data);
         this.nearbyShops.success = data.success;
         this.nearbyShops.numberOfShops = data.numberOfShops;
         this.nearbyShops.nearbyShops = data.nearbyShops;
+        for (let i = 0; i < this.nearbyShops.nearbyShops.length; i++) {
+          this.nearbyShops.nearbyShops[i]["distanceAway"] = data.distances[i];
+          this.isTimeExpried(this.nearbyShops.nearbyShops[i]._id);
+        }
+
       } else {
         this.flashMessage.show('No shops found, please increase radius!', { cssClass: 'alert-danger', timeout: 3000 });
       }
@@ -51,10 +57,11 @@ export class NearbyshopsComponent implements OnInit {
 
   onDislikeShop(shop) {
     let date = new Date().getHours();
-    console.log(date);
     this.shopService.onDislikeShop(shop._id, date).subscribe((data: any) => {
       console.log(data);
+      this.nearbyShops.nearbyShops = this.nearbyShops.nearbyShops.filter(item => item._id != shop._id);
       alert(`${shop.name} ${data.msg}`);
+      this.isTimeExpried(shop._id);
     }, err => { console.log(err) });
   }
 
@@ -65,4 +72,13 @@ export class NearbyshopsComponent implements OnInit {
     }, err => { console.log(err) });
   }
 
+  isTimeExpried(shopId) {
+    this.shopService.isDisliked(shopId).subscribe((res: any) => {
+      console.log(res);
+      if (res.disliked && !res.timeExpired) {
+        this.nearbyShops.nearbyShops = this.nearbyShops.nearbyShops.filter(shop => shop._id != shopId);
+        console.log(this.nearbyShops.nearbyShops);
+      }
+    });
+  }
 }

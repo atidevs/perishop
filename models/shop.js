@@ -83,6 +83,7 @@ module.exports.getNearbyShops = function (userLocation, shops, radius) {
 
   // Declaring an array which going to hold : all shops that fall within the given radius
   let nearbyShops = [];
+  let distances = [];
 
   /**
    * Going through all given shops
@@ -95,13 +96,13 @@ module.exports.getNearbyShops = function (userLocation, shops, radius) {
      */
     if (Shop.distanceAway(userLocation, shops[i].location.coordinates) <= radius) {
       nearbyShops.push(shops[i]);
-      // console.log(Shop.distanceAway(userLocation, shops[i].location.coordinates));
+      distances.push(Shop.distanceAway(userLocation, shops[i].location.coordinates));
       console.log(Shop.distanceAway(userLocation, shops[i].location.coordinates));
     }
   }
 
-  // Return nearbyShops array.
-  return nearbyShops;
+  // Return nearbyShops and distances respectively.
+  return { nearbyShops: nearbyShops, distances: distances };
 }
 
 // module.exports.isLiked = function (username, shopName, callback) {
@@ -110,8 +111,14 @@ module.exports.getNearbyShops = function (userLocation, shops, radius) {
 //   });
 // }
 
-// module.exports.isDisliked = function (username, shopName, callback) {
-//   User.findOne({ username: username, dislikedShops: { $in: [shopName] } }, (err, isFound) => {
-//     callback(err, isFound);
-//   });
-// }
+module.exports.isDisliked = function (username, shopId, callback) {
+  User.findOne({ username: username, dislikedShops: { $elemMatch: { shopId: shopId } } }, (err, isFound) => {
+    if (isFound) {
+      console.log(isFound);
+      let shop = isFound.dislikedShops.find(shop => shop.shopId == shopId);
+      callback(err, isFound, shop.date);
+    } else {
+      callback(err, isFound, null);
+    }
+  });
+}

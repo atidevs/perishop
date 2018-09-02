@@ -108,13 +108,13 @@ router.get('/nearby/:lat-:long-:radius', (req, res) => {
      * Testing if any nearby Shops
      * Were found
      */
-    if (nearbyShops.length == 0) {
+    if (nearbyShops.nearbyShops.length == 0) {
       /**
        * If not shops found send back an object with
        * A success property of value false
        * And an informative message
        */
-      res.json({ success: false, msg: 'No nearby shops were found! Please increase radius!', userLoc: req.params });
+      res.json({ success: false, msg: 'No nearby shops were found! Please increase radius!' });
     } else {
       /**
        * If nearby Shops found send back an object with
@@ -122,7 +122,7 @@ router.get('/nearby/:lat-:long-:radius', (req, res) => {
        * The number of shops found and
        * The array of all shops found.
        */
-      res.json({ success: true, numberOfShops: nearbyShops.length, nearbyShops: nearbyShops, userLoc: req.params });
+      res.json({ success: true, numberOfShops: nearbyShops.nearbyShops.length, nearbyShops: nearbyShops.nearbyShops, distances: nearbyShops.distances, userLoc: req.params });
     }
   });
 });
@@ -138,26 +138,35 @@ router.get('/nearby/:lat-:long-:radius', (req, res) => {
 //   });
 // });
 
-// router.get('/nearby/isd/:username-:shopName', (req, res) => {
-//   Shop.isDisliked(req.params.username, req.params.shopName, (err, isFound) => {
-//     if (err) throw err;
-//     if (isFound) {
-//       res.json({ success: true, msg: `${req.params.shopName} is disliked by ${req.params.username}` });
-//     } else {
-//       res.json({ success: false });
-//     }
-//   });
-// });
+router.get('/nearby/isd/:username-:shopId', (req, res) => {
+  Shop.isDisliked(req.params.username, req.params.shopId, (err, isFound, likedOn) => {
+    if (err) throw err;
+    if (isFound) {
+      let currentHour = new Date().getHours();
+      if (currentHour - likedOn > 2) {
+        res.json({ disliked: true, timeExpired: true });
+      } else {
+        res.json({ disliked: true, timeExpired: false });
+      }
+    } else {
+      res.json({ disliked: false, timeExpired: null });
+    }
+  });
+});
 
 router.get('/myshops/:username', (req, res) => {
   User.findOne({ username: req.params.username }, (err, user) => {
     if (err) throw err;
     if (user) {
       let myShops = user.likedShops;
+      let distances = [];
       Shop.find({ _id: { $in: myShops } }, (err, shops) => {
         if (err) throw err;
         if (shops) {
-          res.json({ success: true, numberOfShops: shops.length, myShops: shops });
+          for (let i = 0; i < shops.length; i++) {
+            distances.push(Shop.distanceAway(userLocation, shops[i].location.coordinates));
+          }
+          res.json({ success: true, numberOfShops: shops.length, myShops: shops, distances: distances });
         } else {
           res.json({ success: false, msg: 'No shops were liked!' });
         }
