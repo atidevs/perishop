@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { ShopService } from '../../services/shop.service';
 import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-myshops',
@@ -19,8 +18,7 @@ export class MyshopsComponent implements OnInit {
 
   constructor(
     private shopService: ShopService,
-    private authService: AuthService,
-    private router: Router) { }
+    private authService: AuthService) { }
 
   ngOnInit() {
     this.authService.user = JSON.parse(localStorage.getItem('user'));
@@ -50,5 +48,4 @@ export class MyshopsComponent implements OnInit {
     }, err => { console.log(err) });
     this.loadMyShops();
   }
-
 }
