@@ -147,10 +147,9 @@ If you want to check the records in the database follow these steps :
 
         ~$ mongod --dbpath=".../perishopApp/perishop/database"
 
-    You will see a (2 connections now open) : since the first connnection is from the app itself and the second is the one we just run : ( > mongo ).
+    You will see somewhere at the end (2 connections now open) : the first connection is from the app itself (When you run ~$ start) and the second is the one we just run : ( > mongo ).
     <br/>
     
-
 2. Now you can run these commands : 
 
         > show dbs  // to show all available databases
