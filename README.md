@@ -15,7 +15,7 @@ Perishop app is built using the MEAN stack :
 
 #### 1. Front End :
 
-:open_file_folder: client-perishop/ 
+:open_file_folder: <b>client-perishop/</b>
 
         Contains source code of the front end side :
                 - Components : client-perishop/src/app/components   
@@ -24,7 +24,7 @@ Perishop app is built using the MEAN stack :
                 - Package.json (dependencies)
                 - Angular CLI generated files
         
-:open_file_folder: client/
+:open_file_folder: <b>client/</b>
 
         This is the folder you need to try the app, please don't delete it.
 
@@ -33,44 +33,44 @@ Perishop app is built using the MEAN stack :
 
 #### 2. Back End :
 
-:open_file_folder: routes/
+:open_file_folder: <strong>routes/</strong>
 
 Contains two file : 
 
-:page_with_curl: shops.js :
+:page_with_curl: <em>shops.js</em> :
         
         Handling Shops end points.
                 
-:page_with_curl: users.js :
+:page_with_curl: <em>users.js</em> :
 
         Handling Users end points.
 
 ---
 
-:open_file_folder: models/
+:open_file_folder: <strong>models/</strong>
 
-:page_with_curl: shops.js :
+:page_with_curl: <em>shops.js</em> :
 
         Holds the definition of Shop Model using Mongoose Schema, for querying the database and handling all CRUD operations that concerns shops records.
 
-:page_with_curl: users.js :
+:page_with_curl: <em>users.js</em> :
 
         Holds the definition of User Model using Mongoose Schema, for querying the database and handling all CRUD operations that deals with users records.
 
 ---
 
-:open_file_folder: config/
+:open_file_folder: <strong>config/</strong>
 
         Holds an Object with database path to connect to using mongoose.
 
 ---
 
-:open_file_folder: database/
+:open_file_folder: <strong>database/</strong>
 
         Holds the database folder where all records go and mongoDB journaling is saved.
 
 ---
-:page_with_curl: app.js
+:page_with_curl: <em>app.js</em>
 
         Is the entry point to the app. It holds a set of imports among which : Express, Mongoose, BodyParser, Passport and other middleware.
 
