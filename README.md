@@ -13,14 +13,14 @@ Perishop app is built using the MEAN stack :
 
 ### II. Front End :zap: Back End :
 
-##### :page_with_curl: Front End :
+#### 1. Front End :
 
 :open_file_folder: client-perishop/ 
 
         Contains source code of the front end side :
-                - Components
-                - Services
-                - Modules
+                - Components : client-perishop/src/app/components   
+                - Services : client-perishop/src/app/services
+                - Modules : client-perishop/src/app
                 - Package.json (dependencies)
                 - Angular CLI generated files
         
@@ -31,21 +31,50 @@ Perishop app is built using the MEAN stack :
         It contains the project build after running :
         > ng build
 
-##### :page_with_curl: Back End :
+#### 2. Back End :
 
 :open_file_folder: routes/
 
+Contains two file : 
+
+:page_with_curl: shops.js :
+        
+        Handling Shops end points.
+                
+:page_with_curl: users.js :
+
+        Handling Users end points.
+
+---
 
 :open_file_folder: models/
 
+:page_with_curl: shops.js :
+
+        Holds the definition of Shop Model using Mongoose Schema, for querying the database and handling all CRUD operations that concerns shops records.
+
+:page_with_curl: users.js :
+
+        Holds the definition of User Model using Mongoose Schema, for querying the database and handling all CRUD operations that deals with users records.
+
+---
 
 :open_file_folder: config/
 
+        Holds an Object with database path to connect to using mongoose.
+
+---
 
 :open_file_folder: database/
 
+        Holds the database folder where all records go and mongoDB journaling is saved.
 
-:page_facing_up: app.js
+---
+:page_with_curl: app.js
+
+        Is the entry point to the app. It holds a set of imports among which : Express, Mongoose, BodyParser, Passport and other middleware.
+
+---
 
 
 
