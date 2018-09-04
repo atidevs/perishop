@@ -2,7 +2,7 @@
     Perishop is a web app that provides you with 300+ Shops.
 ---
 
-### I. Technologies stack :
+### I. Technology stack :
 
 Perishop app is built using the MEAN stack :
 
@@ -11,25 +11,65 @@ Perishop app is built using the MEAN stack :
         A: Angular (Javascript MVC framework for front end web development)
         N: NodeJs (Environment for running Javascript in the server side)
 
-### II. Features :
+### II. Front End :zap: Back End :
+
+##### :page_with_curl: Front End :
+
+:open_file_folder: client-perishop/ 
+
+        Contains source code of the front end side :
+                - Components
+                - Services
+                - Modules
+                - Package.json (dependencies)
+                - Angular CLI generated files
+        
+:open_file_folder: client/
+
+        This is the folder you need to try the app, please don't delete it.
+
+        It contains the project build after running :
+        > ng build
+
+##### :page_with_curl: Back End :
+
+:open_file_folder: routes/
+
+
+:open_file_folder: models/
+
+
+:open_file_folder: config/
+
+
+:open_file_folder: database/
+
+
+:page_facing_up: app.js
+
+
+
+### III. Features :
 *Perishop features are :*
 
-    1. As a new user you can sign up,
-    2. As a registered user you can log in,
-    3. As a registered user you can log out,
-    4. As a registered user you can access Nearby Shops (Nearby Shops),
-    5. As a registered user you can like a shop, therefore adding it to your Preferred Shops (My Shops),
-    6. As a registered user you can access your Preferred Shops list (My Shops) that holds all liked shops,
-    7. As a registered user you can dislike a shop, thus not displaying it for 2 hours in the Nearby Shops list,
-    8. As an unregistered user you cannot access any of the functionalities, but the home page.
----   
-### III. Setting up Perishop :
+1. As a new user you can <b>sign up</b>,
+2. As a registered user you can <b>log in</b>,
+3. As a registered user you can <b>log out</b>,
+4. As a registered user you can access <b>Nearby Shops</b> (Nearby Shops),
+5. As a registered user you can <b>like</b> a shop, therefore adding it to your <b>Preferred Shops</b> (My Shops),
+6. As a registered user you can access your <b>Preferred Shops list</b> (My Shops) that holds all <b>liked</b> shops,
+7. As a registered user you can <b>dislike</b> a shop, thus not displaying it for <b>2 hours</b> in the Nearby Shops list,
+8. As an <b>unregistered</b> user you <b>cannot</b> access any of the functionalities, but the <b>home page</b>.
 
-1. Create a project folder (eg: perishopApp) and cd into it :
+---   
+
+### IV. Setting up Perishop :
+
+1. Create a project folder :open_file_folder: (eg: perishopApp) and cd into it :
 
         ~$ cd ..../perishopApp
 
-2. Clone the github repository in your project folder by running : 
+2. Clone the github repository in your project folder :open_file_folder: by running : 
         
         ~$ .../perishopApp  // present working directory
 
@@ -43,11 +83,11 @@ Perishop app is built using the MEAN stack :
 
         https://git-scm.com/downloads
 
-5. Once MongoDB and git Installed, open up Git bash :
+5. Once MongoDB and git Installed, open up Git bash and cd into :
 
         ~$ cd .../mongodb/bin   (... : wherever path you installed mongodb in, usually C:/mongodb/bin)
 
-    And run this command :
+    Then run this command :
 
         ~$ mongod --dbpath=".../perishopApp/perishop/database"
 
@@ -66,7 +106,7 @@ Perishop app is built using the MEAN stack :
 8. Congrats! You are on the Home Page
 ---
 
-### IV. Playing around with the Database :
+### V. Playing around with the Database :
     
 If you want to check the records in the database follow these steps :
 
