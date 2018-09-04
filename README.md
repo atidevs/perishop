@@ -1,7 +1,17 @@
 ## Perishop App :
     Perishop is a web app that provides you with 300+ Shops.
 ---
-### I. Features :
+
+### I. Technologies stack :
+
+Perishop app is built using the MEAN stack :
+
+        M: MongoDB (NoSQL / Non Relational database)
+        E: ExpressJs (Web application framework for building APIs)
+        A: Angular (Javascript MVC framework for front end web development)
+        N: NodeJs (Environment for running Javascript in the server side)
+
+### II. Features :
 *Perishop features are :*
 
     1. As a new user you can sign up,
@@ -13,7 +23,7 @@
     7. As a registered user you can dislike a shop, thus not displaying it for 2 hours in the Nearby Shops list,
     8. As an unregistered user you cannot access any of the functionalities, but the home page.
 ---   
-### II. Setting up Perishop :
+### III. Setting up Perishop :
 
 1. Create a project folder (eg: perishopApp) and cd into it :
 
@@ -56,7 +66,7 @@
 8. Congrats! You are on the Home Page
 ---
 
-### III. Playing around with the Database :
+### IV. Playing around with the Database :
     
 If you want to check the records in the database follow these steps :
 
